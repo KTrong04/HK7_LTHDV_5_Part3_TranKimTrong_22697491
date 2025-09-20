@@ -1,0 +1,55 @@
+
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Danh sách Sản phẩm</h3>
+  <% if (currentUser) { %>
+    <a class="btn btn-success" href="/products/create">Thêm Sản phẩm</a>
+  <% } %>
+</div>
+
+<form class="row g-3 mb-3" method="get" action="/products">
+  <div class="col-auto">
+    <select class="form-select" name="supplier">
+      <option value="">Tất cả nhà cung cấp</option>
+      <% suppliers.forEach(s => { %>
+        <option value="<%= s._id %>" <%= supplierFilter==s._id ? 'selected' : '' %>><%= s.name %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="col-auto">
+    <input class="form-control" type="search" name="q" placeholder="Tìm theo tên..." value="<%= q || '' %>">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-primary" type="submit">Lọc</button>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tên</th>
+      <th>Giá</th>
+      <th>Số lượng</th>
+      <th>Nhà cung cấp</th>
+      <% if (currentUser) { %><th>Hành động</th><% } %>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach(p => { %>
+      <tr>
+        <td><%= p.name %></td>
+        <td><%= p.price %></td>
+        <td><%= p.quantity %></td>
+        <td><%= p.supplier ? p.supplier.name : 'N/A' %></td>
+        <% if (currentUser) { %>
+          <td>
+            <a class="btn btn-sm btn-primary" href="/products/edit/<%= p._id %>">Sửa</a>
+            <form action="/products/delete/<%= p._id %>" method="post" style="display:inline-block" onsubmit="return confirm('Xóa sản phẩm?');">
+              <button class="btn btn-sm btn-danger">Xóa</button>
+            </form>
+          </td>
+        <% } %>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

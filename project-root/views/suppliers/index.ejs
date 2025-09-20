@@ -1,0 +1,36 @@
+
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Danh sách Nhà cung cấp</h3>
+  <% if (currentUser) { %>
+    <a class="btn btn-success" href="/suppliers/create">Thêm Nhà cung cấp</a>
+  <% } %>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Tên</th>
+      <th>Địa chỉ</th>
+      <th>Điện thoại</th>
+      <% if (currentUser) { %><th>Hành động</th><% } %>
+    </tr>
+  </thead>
+  <tbody>
+    <% suppliers.forEach(s => { %>
+      <tr>
+        <td><%= s.name %></td>
+        <td><%= s.address %></td>
+        <td><%= s.phone %></td>
+        <% if (currentUser) { %>
+          <td>
+            <a class="btn btn-sm btn-primary" href="/suppliers/edit/<%= s._id %>">Sửa</a>
+            <form action="/suppliers/delete/<%= s._id %>" method="post" style="display:inline-block" onsubmit="return confirm('Xóa nhà cung cấp?');">
+              <button class="btn btn-sm btn-danger">Xóa</button>
+            </form>
+          </td>
+        <% } %>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

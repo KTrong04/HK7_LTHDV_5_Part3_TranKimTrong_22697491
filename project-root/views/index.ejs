@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-3">
+    <h5>Nhà cung cấp</h5>
+    <ul class="list-group">
+      <li class="list-group-item"><a href="/products">Tất cả</a></li>
+      <% suppliers.forEach(s => { %>
+        <li class="list-group-item">
+          <a href="/products?supplier=<%= s._id %>"><%= s.name %></a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+  <div class="col-md-9">
+    <h3>Sản phẩm mới nhất</h3>
+    <div class="row">
+      <% if (products.length === 0) { %>
+        <div class="col-12">Chưa có sản phẩm nào.</div>
+      <% } %>
+      <% products.forEach(p => { %>
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= p.name %></h5>
+              <p class="card-text">Giá: <strong><%= p.price %></strong></p>
+              <p class="card-text">Số lượng: <%= p.quantity %></p>
+              <p class="card-text"><small class="text-muted">Nhà cung cấp: <%= p.supplier ? p.supplier.name : 'N/A' %></small></p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h3><%= product ? 'Chỉnh sửa Sản phẩm' : 'Tạo Sản phẩm' %></h3>
+    <form method="post" action="<%= product ? '/products/edit/' + product._id : '/products/create' %>">
+      <div class="mb-3">
+        <label class="form-label">Tên</label>
+        <input class="form-control" name="name" required value="<%= product ? product.name : '' %>">
+      </div>
+      <div class="mb-3 row">
+        <div class="col">
+          <label class="form-label">Giá</label>
+          <input class="form-control" name="price" type="number" step="0.01" value="<%= product ? product.price : 0 %>" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Số lượng</label>
+          <input class="form-control" name="quantity" type="number" value="<%= product ? product.quantity : 0 %>" required>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nhà cung cấp</label>
+        <select class="form-select" name="supplier" required>
+          <option value="">-- Chọn nhà cung cấp --</option>
+          <% suppliers.forEach(s => { %>
+            <option value="<%= s._id %>" <%= product && product.supplier && (product.supplier.toString() === s._id.toString()) ? 'selected' : '' %>><%= s.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit"><%= product ? 'Cập nhật' : 'Tạo' %></button>
+    </form>
+  </div>
+</div>
