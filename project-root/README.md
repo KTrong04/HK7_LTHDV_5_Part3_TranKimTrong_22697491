@@ -55,7 +55,3 @@ Không commit node_modules và .env (đã thêm .gitignore).
 - Mình để Bootstrap dùng CDN cho nhanh; bạn có thể đổi sang tải xuống và lưu trong `/public`.
 - Flash messages: nếu không hiện, đảm bảo bạn thêm middleware để đẩy `res.locals.messages = req.flash()` ngay sau `app.use(flash())` trong `app.js`. (Mình đã nhắc thêm trong phần views).
 - `views/layout.ejs` dùng cú pháp `layout('layout')` — đảm bảo sử dụng EJS thuận tiện. Nếu muốn dùng một cách khác (render with locals), có thể thay đổi theo nhu cầu.
-
----
-
-Nếu bạn muốn mình **tạo file zip / commit sẵn** hoặc **gửi từng file theo thứ tự để bạn copy dễ hơn**, báo mình — mình sẽ xuất theo dạng dễ copy (hoặc tạo hướng dẫn line-by-line). Hoặc nếu muốn mở rộng: thêm roles (admin), API JSON, hoặc tích hợp email cho reset password — mình làm tiếp luôn.
